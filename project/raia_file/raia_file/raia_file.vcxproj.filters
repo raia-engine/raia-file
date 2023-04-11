@@ -16,6 +16,9 @@
     <Filter Include="ソース ファイル\duktape">
       <UniqueIdentifier>{b1d0f85b-69b7-4de4-930d-78b915767cad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\util">
+      <UniqueIdentifier>{9adf0fa8-2231-4ee2-90d8-08b51050084e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -33,6 +36,15 @@
     <ClInclude Include="..\..\..\..\raia-file\src\duktape\duktape.h">
       <Filter>ソース ファイル\duktape</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\util\util_file.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\util\util_path.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\platform.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -46,6 +58,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\raia-file\src\duktape\duktape.c">
       <Filter>ソース ファイル\duktape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\util\util_file.c">
+      <Filter>ソース ファイル\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\util\util_path.c">
+      <Filter>ソース ファイル\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

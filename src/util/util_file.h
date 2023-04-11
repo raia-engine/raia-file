@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include "../platform.h"
 
 char *load_string(const char *filename);
 int save_string(const char *filename, const char *content);

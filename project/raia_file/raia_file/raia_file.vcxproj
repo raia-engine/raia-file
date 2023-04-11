@@ -150,12 +150,17 @@
     <ClInclude Include="..\..\..\..\raia-file\src\duktape\duktape.h" />
     <ClInclude Include="..\..\..\..\raia-file\src\duktape\duk_config.h" />
     <ClInclude Include="..\..\..\..\raia-file\src\raia_file.h" />
+    <ClInclude Include="..\..\..\src\platform.h" />
+    <ClInclude Include="..\..\..\src\util\util_file.h" />
+    <ClInclude Include="..\..\..\src\util\util_path.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\raia-file\src\duktape\duktape.c" />
     <ClCompile Include="..\..\..\..\raia-file\src\raia_file.c" />
+    <ClCompile Include="..\..\..\src\util\util_file.c" />
+    <ClCompile Include="..\..\..\src\util\util_path.c" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

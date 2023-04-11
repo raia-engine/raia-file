@@ -43,8 +43,14 @@ char *load_string(const char *filename) {
 }
 
 int save_string(const char *filename, const char *content) {
+    FILE* file;
+#ifdef __WINDOWS__
+    fopen_s(&file, filename, "w");
+#else
+    file = fopen(filename, "w");
+#endif
     // Open the file for writing
-    FILE *file = fopen(filename, "w");
+    //FILE *file = fopen(filename, "w");
     if (file == NULL) {
         perror("Error opening file");
         return 1;
@@ -67,7 +73,12 @@ int save_string(const char *filename, const char *content) {
 }
 
 uint8_t *load_binary(const char *filename, size_t *file_size) {
-    FILE *file = fopen(filename, "rb");
+    FILE* file;// = fopen(filename, "rb");
+#ifdef __WINDOWS__
+    fopen_s(&file, filename, "rb");
+#else
+    file = fopen(filename, "rb");
+#endif
     if (file == NULL) {
         printf("Error opening file: %s\n", filename);
         return NULL;
@@ -102,7 +113,12 @@ uint8_t *load_binary(const char *filename, size_t *file_size) {
 }
 
 int save_binary(const char *filename, uint8_t *data, size_t data_size) {
-    FILE *file = fopen(filename, "wb");
+    FILE* file;// = fopen(filename, "wb");
+#ifdef __WINDOWS__
+    fopen_s(&file, filename, "wb");
+#else
+    file = fopen(filename, "wb");
+#endif
     if (file == NULL) {
         printf("Error: Unable to open file %s\n", filename);
         return 1;
