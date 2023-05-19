@@ -8,10 +8,8 @@ set(CMAKE_C_STANDARD 11)
 
 add_library(raia_file SHARED
         src/raia_file.c
-        src/duktape/duktape.c
         src/util/util_file.c
-        src/util/util_file.h
-        src/parson/parson.c src/wrapper/wrapper_parson.c src/wrapper/wrapper_parson.h)
+        src/yyjson/yyjson.c)
 
 target_link_libraries(raia_file m)
 

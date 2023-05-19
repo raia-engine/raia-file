@@ -86,14 +86,37 @@ void get_directories(const char *path, char ***directories, size_t *count) {
 
 #endif
 
-char *get_current_path() {
-    char cwd[500];
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-        return cwd;
-    } else {
-        return NULL;
+#ifdef _WIN32
+#include <direct.h>
+#define getcwd _getcwd // Windowsでは_getcwdを使用します
+#else
+#include <unistd.h>
+#endif
+
+char* get_current_path() {
+    char* cwd = (char*) malloc(1024);
+    if (cwd == NULL) {
+        perror("malloc");
+        exit(EXIT_FAILURE);
     }
+
+    if (getcwd(cwd, 1024) == NULL) {
+        perror("getcwd");
+        free(cwd);
+        exit(EXIT_FAILURE);
+    }
+
+    return cwd;
 }
+
+//char *get_current_path() {
+//    char cwd[500];
+//    if (getcwd(cwd, sizeof(cwd)) != NULL) {
+//        return cwd;
+//    } else {
+//        return "";
+//    }
+//}
 
 char *get_exe_path() {
 #ifdef __LINUX__
