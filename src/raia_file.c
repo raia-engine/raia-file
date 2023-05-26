@@ -14,7 +14,7 @@ RAIA_EXPORT void *raia_file_exist(const char *s, void *p, int n) {
     yyjson_val *arg_val = yyjson_obj_get(arg_root, "path");
     const char *path = yyjson_get_str(arg_val);
 
-    int exist = file_check_path(path); // 0 = 存在しない, 1 = ファイルがある, 2 = パスがある
+    int exist = file_check_path(path);
 
     yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
     yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);

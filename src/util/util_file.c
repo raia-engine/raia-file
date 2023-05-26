@@ -109,15 +109,6 @@ char* get_current_path() {
     return cwd;
 }
 
-//char *get_current_path() {
-//    char cwd[500];
-//    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-//        return cwd;
-//    } else {
-//        return "";
-//    }
-//}
-
 char *get_exe_path() {
 #ifdef __LINUX__
     char path[1024];
