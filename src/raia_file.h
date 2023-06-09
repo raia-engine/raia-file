@@ -2,6 +2,7 @@
 #define RAIA_FILE_RAIA_FILE_H
 
 #include "yyjson/yyjson.h"
+#include "wrapper/wrapper_yyjson.h"
 #include "util/util_file.h"
 
 #ifdef __WINDOWS__
