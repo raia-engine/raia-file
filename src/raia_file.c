@@ -9,27 +9,27 @@
 #define RAIA_EXPORT
 #endif
 
-RAIA_EXPORT void *raia_file_exist(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_exist(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
 
     int exist = file_check_path(path);
 
     joint_add_out_int(joint, "result", exist);
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_file_load_string(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_load_string(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
 
     const char *str = file_load_string(path);
 
     joint_add_out_str(joint, "result", str);
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_file_save_string(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_save_string(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
     const char *data = joint_get_in_str(joint, "data");
@@ -37,10 +37,10 @@ RAIA_EXPORT void *raia_file_save_string(const char *s, void *p, int n) {
     file_save_string(path, data);
 
     joint_add_out_bool(joint, "result", true);
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_file_load_binary(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_load_binary(const char *s) {
     joint_t *joint = joint_init_in_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
 
@@ -52,15 +52,15 @@ RAIA_EXPORT void *raia_file_load_binary(const char *s, void *p, int n) {
     }
 
     joint_free(joint);
-    return file_data;
+    return (const char *)file_data;
 }
 
-RAIA_EXPORT void *raia_file_save_binary(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_save_binary(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
+    uint8_t *data = (uint8_t *)(uintptr_t)joint_get_in_uint(joint, "data");
+    size_t data_size = joint_get_in_int(joint, "size");
 
-    size_t data_size = n;
-    uint8_t *data = p;
     int is_success = file_save_binary(path, data, data_size);
 
     if (is_success == 0) {
@@ -68,26 +68,26 @@ RAIA_EXPORT void *raia_file_save_binary(const char *s, void *p, int n) {
     } else {
         joint_add_out_bool(joint, "result", false);
     }
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_file_get_exe_path(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_get_exe_path(const char *s) {
     char *path = get_exe_path();
 
     joint_t *joint = joint_init_out();
     joint_add_out_str(joint, "result", path);
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_file_get_cur_path(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_get_cur_path(const char *s) {
     char *path = get_current_path();
 
     joint_t *joint = joint_init_out();
     joint_add_out_str(joint, "result", path);
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_file_get_dirs(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_get_dirs(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
 
@@ -96,10 +96,10 @@ RAIA_EXPORT void *raia_file_get_dirs(const char *s, void *p, int n) {
     get_directories(path, &directories, &count);
 
     joint_add_out_arr_str(joint, "result", (const char **)directories, count);
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_file_get_dirs_all(const char *s, void *p, int n) {
+RAIA_EXPORT const char *raia_file_get_dirs_all(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
 
@@ -108,5 +108,5 @@ RAIA_EXPORT void *raia_file_get_dirs_all(const char *s, void *p, int n) {
     get_directories_recursive(path, &directories, &count);
 
     joint_add_out_arr_str(joint, "result", (const char **)directories, count);
-    return (void *)joint_out_write(joint);
+    return joint_out_write(joint);
 }
